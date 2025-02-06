@@ -7,7 +7,7 @@ export default function Index() {
       style={styles.container}
     >
       <Text style={styles.text}>Home screen</Text>
-        <Link href="/about" style={styles.button}>
+        <Link href="/app/(tabs)/about" style={styles.button}>
             Go to about screen
         </Link>
     </View>
