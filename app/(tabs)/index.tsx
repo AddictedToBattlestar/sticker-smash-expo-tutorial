@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Image} from 'expo-image';
 
+import ImageViewer from '@/components/imageViewer';
+
 const PlaceholderImage = require('@/assets/images/background-image.png');
 
 export default function Index() {
@@ -9,7 +11,7 @@ export default function Index() {
       style={styles.container}
     >
       <View style={styles.imageContainer}>
-          <Image source={PlaceholderImage} style={styles.image} />
+          <ImageViewer imgSource={PlaceholderImage} />
       </View>
     </View>
   );
@@ -23,10 +25,5 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         flex: 1,
-    },
-    image: {
-        width: 320,
-        height: 440,
-        borderRadius: 18,
-    },
+    }
 });
