@@ -47,7 +47,7 @@ export default function Index() {
           <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
       </View>
         {showAppOptions ? (
-            <View style={styles.container}>
+            <View style={styles.optionsContainer}>
                 <View style={styles.optionsRow}>
                     <IconButton icon="refresh" label="Reset" onPress={onReset}/>
                     <CircleButton onPress={onAddSticker} />
