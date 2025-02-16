@@ -4,6 +4,7 @@ import { type ImageSource } from 'expo-image';
 import { GestureHandlerRootView} from "react-native-gesture-handler";
 import * as MediaLibrary from "expo-media-library";
 import { useState, useRef } from "react";
+import { captureRef } from 'react-native-view-shot';
 
 import Button from '@/components/Button';
 import ImageViewer from '@/components/ImageViewer';
@@ -52,7 +53,19 @@ export default function Index() {
     };
 
     const onSaveImageAsync = async () => {
-            // we will implement this later
+        try {
+            const localUri = await captureRef(imageRef, {
+                height: 440,
+                quality: 1
+            });
+
+            await MediaLibrary.saveToLibraryAsync(localUri);
+            if (localUri) {
+                alert('Saved!');
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     if (status == null) {

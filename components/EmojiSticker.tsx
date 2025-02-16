@@ -33,7 +33,6 @@ export default function EmojiSticker({imageSize, stickerSource}: Props) {
     const drag = Gesture.Pan().onChange(event => {
        translateX.value = event.changeX;
        translateY.value = event.changeY;
-       console.log(`translateX: ${translateX.value}, translateY: ${translateY.value}`);
     });
 
     const containerStyle = useAnimatedStyle(() => {
