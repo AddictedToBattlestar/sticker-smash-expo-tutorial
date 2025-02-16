@@ -1,8 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
-import { useState } from 'react';
 import { type ImageSource } from 'expo-image';
 import { GestureHandlerRootView} from "react-native-gesture-handler";
+import * as MediaLibrary from "expo-media-library";
+import { useState, useRef } from "react";
 
 import Button from '@/components/Button';
 import ImageViewer from '@/components/ImageViewer';
@@ -15,6 +16,8 @@ import EmojiSticker from "@/components/EmojiSticker";
 const PlaceholderImage = require('@/assets/images/background-image.png');
 
 export default function Index() {
+    const imageRef = useRef<View>(null);
+    const [status, requestPermission] = MediaLibrary.usePermissions();
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
     const [showAppOptions, setShowAppOptions] = useState<boolean>(false)
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
@@ -52,11 +55,17 @@ export default function Index() {
             // we will implement this later
     };
 
+    if (status == null) {
+        requestPermission();
+    }
+
   return (
       <GestureHandlerRootView style={styles.container}>
           <View style={styles.imageContainer}>
-              <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
-              {pickedEmoji && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} /> }
+              <View ref={imageRef} collapsable={false}>
+                  <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
+                  {pickedEmoji && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} /> }
+              </View>
           </View>
           {showAppOptions ? (
               <View style={styles.optionsContainer}>
